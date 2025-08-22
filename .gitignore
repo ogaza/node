@@ -1,0 +1,35 @@
+node_modules
+
+# Logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+*.log
+
+# Environment files
+.env
+
+# OS generated files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Build output
+dist/
+build/
+coverage/
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+*.tgz
+*.db.json
+
+# IDE files
+.idea/
+.vscode/
+
+# Test output
+*.test.js
+
