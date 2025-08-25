@@ -31,5 +31,5 @@ coverage/
 .vscode/
 
 # Test output
-*.test.js
+# *.test.js
 
