@@ -104,6 +104,14 @@ yargs(hideBin(process.argv))
       start(notes, argv.port);
     }
   )
+  .command(
+    "simple_server",
+    "launch just a basic empty server",
+    () => {},
+    async (argv) => {
+      await import("./server_basic.js");
+    }
+  )
   .demandCommand(1) // this means you need to use ntt with a command name - ntt curl for example
   .parse(); // this just means go and execute
 

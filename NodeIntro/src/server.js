@@ -1,6 +1,10 @@
 import fs from "node:fs/promises";
 import http from "node:http";
 // import open from "open";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export const start = (notes, port) => {
   const server = createServer(notes);
@@ -14,9 +18,8 @@ export const start = (notes, port) => {
 const createServer = (notes) => {
   return http.createServer(async (req, res) => {
 
-    // const HTML_PATH = new URL("./template.html", import.meta.url).pathname;
-    const template = await fs.readFile("./src/template.html", "utf-8");
-    // const template = await fs.readFile(HTML_PATH, "utf-8");
+    const template = await fs.readFile(`${__dirname}/template.html`, "utf-8");
+    // const template = await fs.readFile("./src/template.html", "utf-8");
 
     const html = interpolate(template, { notes: formatNotes(notes) });
 
