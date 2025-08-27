@@ -1,0 +1,22 @@
+{
+  "name": "hard_parts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "bin": {
+    "hard_parts": "./index.js"
+  },
+  "type": "module",
+  "scripts": {
+    "greetings": "cd greetings/ & node index.js",
+    "queues": "cd queues/ & node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "jest": "^30.0.5"
+  }
+}
