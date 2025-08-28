@@ -7,6 +7,7 @@ function handleHelpCommand() {
   console.log("--------------------------------------------------");
   console.log("digging_into CLI App");
   console.log("--------------------------------------------------");
+  console.log("digging_into stream_file --path=\"test.txt\" streams test.txt to stdout");
   console.log("digging_into process_file --path=\"test.txt\"   processes test.txt file");
   console.log("cat test.txt | digging_into in        as abowe but using stdin");
   console.log("cat test.txt | digging_into process_stdin as abowe using stream pipe");

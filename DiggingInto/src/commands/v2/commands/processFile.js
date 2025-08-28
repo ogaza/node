@@ -6,7 +6,8 @@ function canHandle({ name, params: { path } }) {
   return (
     (name == "process_file" && !!path) ||
     name == "in" ||
-    name == "process_stdin"
+    name == "process_stdin" ||
+    name == "stream_file"
   );
 }
 function handle({ name, params: { path } }) {
@@ -20,6 +21,9 @@ function handle({ name, params: { path } }) {
       break;
     case "process_stdin":
       processStdin();
+      break;
+    case "stream_file":
+      processFileAsStream(path);
       break;
 
     default:
@@ -54,6 +58,12 @@ function onStdinError(err) {
 
 function processFile(filepath) {
   readFile(filepath, onFileContentsLoaded);
+}
+
+function processFileAsStream(filepath) {
+  const fileStream = createReadStream(filepath);
+
+  fileStream.pipe(process.stdout);
 }
 
 function onFileContentsLoaded(error, contents) {
