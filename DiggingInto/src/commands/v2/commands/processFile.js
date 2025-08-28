@@ -1,9 +1,13 @@
-import { readFile } from "node:fs";
+import { readFile, createReadStream } from "node:fs";
 import getStdin from "get-stdin";
 import { createHandler } from "./createHandler.js";
 
 function canHandle({ name, params: { path } }) {
-  return (name == "process_file" && !!path) || name == "in";
+  return (
+    (name == "process_file" && !!path) ||
+    name == "in" ||
+    name == "process_stdin"
+  );
 }
 function handle({ name, params: { path } }) {
   switch (name) {
@@ -14,6 +18,9 @@ function handle({ name, params: { path } }) {
       console.log("processing from stdin");
       loadFromStdin();
       break;
+    case "process_stdin":
+      processStdin();
+      break;
 
     default:
       break;
@@ -22,7 +29,13 @@ function handle({ name, params: { path } }) {
 
 export const processFileHandler = createHandler(canHandle, handle);
 
-// processing from stdin
+// processing file as it is being read from stdin
+function processStdin() {
+  var stream = process.stdin;
+  stream.pipe(process.stdout);
+}
+
+// processing the whole taken from stdin
 
 function loadFromStdin() {
   getStdin().then(onLoadedFromStdin).catch(onStdinError);
