@@ -1,8 +1,14 @@
 import { getHandlersFor, register } from "./handlers.js";
 import { helpCommandHandler } from "./help.js";
-import { processFileHandler } from "./processFile.js";
+import { readFileHandler } from "./readFile.js";
+import { streamFileHandler } from "./streamFile.js";
 import { testCommandHandler } from "./test.js";
 
-register([helpCommandHandler, processFileHandler, testCommandHandler]);
+register([
+  helpCommandHandler,
+  readFileHandler,
+  streamFileHandler,
+  testCommandHandler,
+]);
 
 export { getHandlersFor };
