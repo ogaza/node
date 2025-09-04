@@ -18,6 +18,10 @@ function handleHelpCommand() {
   console.log("digging_into compress_file --path=... compresses a file");
   console.log("digging_into decompress_file --path=... decompresses a file");
   console.log("- - - - - - - - - - - - - - - - - - - - - - - - - -");
+  console.log("digging_into db_init initializes an sqlite3 database");
+  console.log("digging_into db_get_all gets all the db records");
+  console.log("digging_into db_insert_other --id --data db insert example");
+  console.log("- - - - - - - - - - - - - - - - - - - - - - - - - -");
   console.log("BASE_PATH=files digging_into ...      sets env variable BASE_PATH");
   console.log("digging_into test                     runs test command");
   console.log("digging_into --help                   prints help");
