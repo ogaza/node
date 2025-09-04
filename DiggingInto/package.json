@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "get-stdin": "^9.0.0",
+    "node-static-alias": "^1.1.2",
     "sqlite3": "^5.1.7"
   }
 }

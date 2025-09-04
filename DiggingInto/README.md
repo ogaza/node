@@ -15,5 +15,17 @@ Here is the package web-site:
 And here is the course chapter in which he explains how to use CAF:
 [CAF usage](https://frontendmasters.com/courses/digging-into-node/asynchronous-cancellation-timeouts/)
 
+## Node Web Server
+
+### Starting the node web application
+
+Open the src_webserver subfolder in the terminal
+
+Run the command:
+```
+node server.js
+```
+
 ## Resources
 * [Streams](https://frontendmasters.com/courses/networking-streams/)
+* [Static Files Serever](https://www.npmjs.com/package/node-static-alias)
