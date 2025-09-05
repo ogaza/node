@@ -33,7 +33,7 @@ var fileServer = new staticAlias.Server(WEB_PATH, {
 
 var server = http.createServer(hanleRequest);
 server.listen(HTTP_PORT);
-console.log(`Listening on http://localhost:${HTTP_PORT}...`);
+console.log(`Server running on http://localhost:${HTTP_PORT}`);
 
 async function hanleRequest(req, res) {
   if (/\/get-records\b/.test(req.url)) {
@@ -49,7 +49,6 @@ async function hanleRequest(req, res) {
 
 async function handleGetRecordsReq(req, res) {
   // await delay(1000);
-
   let records = (await getAllRecords()) || [];
 
   res.writeHead(200, {
@@ -60,9 +59,10 @@ async function handleGetRecordsReq(req, res) {
 }
 
 function getAllRecords() {
-  return new Promise((res, rej) => {
-    setTimeout(() => {
-      res([{ id: 1, data: "one" }]);
-    }, 100);
-  });
+  return Promise.resolve([{ id: 1, data: "one" }]);
+  // return new Promise((res, rej) => {
+  //   setTimeout(() => {
+  //     res([{ id: 1, data: "one" }]);
+  //   }, 100);
+  // });
 }
