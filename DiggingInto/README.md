@@ -26,6 +26,22 @@ Run the command:
 node server.js
 ```
 
+## Debugging Node process
+
+When starting a new Node process add the <code>--inspect</code> argument to the CLI command,
+for Example:
+```
+node --inspect server_express.js
+```
+Now you can attach for example chrome debugger to the process.
+Type:
+
+``` bash
+chrome://inspect
+```
+In the address bar.
+
+
 ## Resources
 * [Streams](https://frontendmasters.com/courses/networking-streams/)
 * [Static Files Serever](https://www.npmjs.com/package/node-static-alias)
