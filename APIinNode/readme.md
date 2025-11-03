@@ -20,3 +20,6 @@ To run the comamnd-line-prompt postgre client on the docker container execute th
 docker exec -u postgres -it pg psql
 ```
 This can be shut down with the <b>exit</b> prompt.
+
+More info about these steps can also be found on the FrontenMasters course page and in the materials to it:
+[FM](https://sql.holt.courses/lessons/databases-and-tables/databases)
