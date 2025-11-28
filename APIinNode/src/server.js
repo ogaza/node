@@ -9,6 +9,7 @@ app.use(express.static("static"));
 
 app.get("/", handleRootGet);
 app.get("/recipes", handleGetRecipes);
+app.get("/recipes/:id", handleGetRecipe);
 
 export function appStart() {
   // creates and starts a server for our API on a defined port
@@ -23,8 +24,20 @@ function handleRootGet(req, res) {
 }
 
 async function handleGetRecipes(req, res) {
-
   const { rows } = await db.query(`SELECT * FROM recipes`);
+
+  res.setHeader("Content-Type", "application/json");
+  res.setHeader("Cache-Control", "max-age: 0, no-cache");
+  res.writeHead(200);
+  res.end(JSON.stringify(rows));
+}
+
+async function handleGetRecipe(req, res) {
+  const {
+    params: { id },
+  } = req;
+
+  const { rows } = await db.query(`SELECT * FROM recipes WHERE recipe_id = $1`, [id]);
 
   res.setHeader("Content-Type", "application/json");
   res.setHeader("Cache-Control", "max-age: 0, no-cache");
