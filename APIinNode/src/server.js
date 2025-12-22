@@ -1,6 +1,7 @@
 import express from "express";
 import path from "path";
 import db from "./db.js";
+import router from "./router.js";
 
 const app = express();
 const port = 5000;
@@ -8,9 +9,9 @@ const port = 5000;
 app.use(express.static("static"));
 
 app.get("/", handleRootGet);
-app.get("/recipes", handleGetRecipes);
-app.get("/recipes/:id", handleGetRecipe);
 app.get("/search", handleSearch);
+
+app.use("/api", router);
 
 export function appStart() {
   // creates and starts a server for our API on a defined port
@@ -22,31 +23,6 @@ export function appStart() {
 function handleRootGet(req, res) {
   // sending back an HTML file that a browser can render on the screen.
   res.sendFile(path.resolve("pages/index.html"));
-}
-
-async function handleGetRecipes(req, res) {
-  const { rows } = await db.query(`SELECT * FROM recipes`);
-
-  res.setHeader("Content-Type", "application/json");
-  res.setHeader("Cache-Control", "max-age: 0, no-cache");
-  res.writeHead(200);
-  res.end(JSON.stringify(rows));
-}
-
-async function handleGetRecipe(req, res) {
-  const {
-    params: { id },
-  } = req;
-
-  const { rows } = await db.query(
-    `SELECT * FROM recipes WHERE recipe_id = $1`,
-    [id]
-  );
-
-  res.setHeader("Content-Type", "application/json");
-  res.setHeader("Cache-Control", "max-age: 0, no-cache");
-  res.writeHead(200);
-  res.end(JSON.stringify(rows));
 }
 
 async function handleSearch({ query }, res) {
