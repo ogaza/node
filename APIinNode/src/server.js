@@ -1,7 +1,8 @@
 import express from "express";
 import path from "path";
 import db from "./db.js";
-import router from "./router.js";
+import ingredientsRouter from "./ingredientsRouter.js";
+import recipesRouter from "./recipesRouter.js";
 
 const app = express();
 const port = 5000;
@@ -11,7 +12,8 @@ app.use(express.static("static"));
 app.get("/", handleRootGet);
 app.get("/search", handleSearch);
 
-app.use("/api", router);
+app.use("/api", recipesRouter);
+app.use("/api", ingredientsRouter);
 
 export function appStart() {
   // creates and starts a server for our API on a defined port

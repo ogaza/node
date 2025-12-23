@@ -1,12 +1,12 @@
 import { Router } from "express";
 import db from "./db.js";
 
-const router = Router();
+const recipesRouter = Router();
 
-router.get("/recipes", handleGetRecipes);
-router.get("/recipes/:id", handleGetRecipe);
-router.post("/recipes", handlePostRecipe);
-router.delete("/recipes/:id", handleDeleteRecipe);
+recipesRouter.get("/recipes", handleGetRecipes);
+recipesRouter.get("/recipes/:id", handleGetRecipe);
+recipesRouter.post("/recipes", handlePostRecipe);
+recipesRouter.delete("/recipes/:id", handleDeleteRecipe);
 
 async function handleGetRecipes(req, res) {
   const { rows } = await db.query(`SELECT * FROM recipes`);
@@ -37,4 +37,4 @@ function handlePostRecipe() {}
 function handleDeleteRecipe() {}
 
 
-export default router;
+export default recipesRouter;
