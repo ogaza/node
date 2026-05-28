@@ -12,6 +12,7 @@
   "description": "",
   "dependencies": {
     "express": "^5.1.0",
+    "lodash.merge": "^4.6.2",
     "pg": "^8.16.3"
   },
   "devDependencies": {

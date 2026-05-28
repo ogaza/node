@@ -3,14 +3,16 @@ import path from "path";
 import db from "./db.js";
 import ingredientsRouter from "./ingredientsRouter.js";
 import recipesRouter from "./recipesRouter.js";
+import config from "./config/index.js";
 
 const app = express();
-const port = 6000;
+const port = config.port;
 
 app.use(express.static("static"));
 
 app.get("/", handleRootGet);
 app.get("/search", handleSearch);
+app.get("/config", handleConfig);
 
 app.use("/api", recipesRouter);
 app.use("/api", ingredientsRouter);
@@ -53,4 +55,8 @@ async function handleSearch({ query }, res) {
 
   res.status(500).json({ rows });
   // res.status(500).json({ message: "not implemented", page });
+}
+
+function handleConfig(req, res) {
+  res.json({ config });
 }
