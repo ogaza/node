@@ -5,7 +5,7 @@ import ingredientsRouter from "./ingredientsRouter.js";
 import recipesRouter from "./recipesRouter.js";
 
 const app = express();
-const port = 5000;
+const port = 6000;
 
 app.use(express.static("static"));
 
@@ -48,7 +48,7 @@ async function handleSearch({ query }, res) {
      WHERE
        title ILIKE $1
      OFFSET $2 LIMIT $3`,
-    params
+    params,
   );
 
   res.status(500).json({ rows });
