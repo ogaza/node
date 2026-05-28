@@ -4,11 +4,13 @@
 docker pull postgres:14
 docker run -e POSTGRES_PASSWORD=lol --name=pg --rm -d -p 5432:5432 postgres:14
 ```
+
 In the second command the --rm param can be removed so the container is not deleted:
 
 ```docker
 docker run -e POSTGRES_PASSWORD=lol --name=pg -d -p 5432:5432 postgres:14
 ```
+
 This sets up a server on the localhost(127.0.0.1) with a default user called <i>postgre</i> and the password: <i>lol</i>
 
 The connection to the server can be established via Code extension called PostgreSQL Client:
@@ -19,7 +21,43 @@ To run the comamnd-line-prompt postgre client on the docker container execute th
 ```docker
 docker exec -u postgres -it pg psql
 ```
+
 This can be shut down with the <b>exit</b> prompt.
 
 More info about these steps can also be found on the FrontenMasters course page and in the materials to it:
 [FM](https://sql.holt.courses/lessons/databases-and-tables/databases)
+
+To actually set-up the db the PostgreSQL extension to the VS Code may be used.
+After configuring the connection to the pg server the db is to be created with
+the command
+
+```sql
+CREATE DATABASE recipeguru;
+```
+
+It can de run directly from the recipes.sql file
+as the extension adds some useful buttons to the UI.
+The rest of the db set-up can be done the same also
+from the recipes.sql file.
+
+## Running the app
+
+Start with installing the npm packages
+
+```
+npm i
+```
+
+then type the command
+
+```
+npm run dev
+```
+
+Server listenes on the port 5000. The
+
+```
+localhost:5000/search
+```
+
+should return some results from the DB
