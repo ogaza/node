@@ -1,62 +1,25 @@
 import express from "express";
-import path from "path";
-import db from "./db.js";
 import ingredientsRouter from "./ingredientsRouter.js";
 import recipesRouter from "./recipesRouter.js";
+import searchRouter from "./searchRouter.js";
 import config from "./config/index.js";
+import configRouter from "./config/configRouter.js";
+import pagesRouter from "./pages/pagesRouter.js";
 
 const app = express();
 const port = config.port;
 
 app.use(express.static("static"));
 
-app.get("/", handleRootGet);
-app.get("/search", handleSearch);
-app.get("/config", handleConfig);
-
-app.use("/api", recipesRouter);
+app.use("/", configRouter);
+app.use("/", pagesRouter);
+app.use("/", searchRouter);
 app.use("/api", ingredientsRouter);
+app.use("/api", recipesRouter);
 
 export function appStart() {
   // creates and starts a server for our API on a defined port
   app.listen(port, function onAppListening() {
     console.log(`Example app listening at http://localhost:${port}`);
   });
-}
-
-function handleRootGet(req, res) {
-  // sending back an HTML file that a browser can render on the screen.
-  res.sendFile(path.resolve("pages/index.html"));
-}
-
-async function handleSearch({ query }, res) {
-  let { term, page } = query;
-
-  term = !!term ? term : "";
-  page = !!Number(page) ? Math.floor(Number(page)) : 1;
-
-  const pageLength = 5;
-  const offset = (page - 1) * pageLength;
-  const params = [`%${term}%`, offset, pageLength];
-
-  console.log(`getting page: ${page}`);
-  console.log("params", params);
-
-  const { rows } = await db.query(
-    `SELECT
-       *,
-       count(*) OVER()::INT AS total_count
-     FROM recipes
-     WHERE
-       title ILIKE $1
-     OFFSET $2 LIMIT $3`,
-    params,
-  );
-
-  res.status(500).json({ rows });
-  // res.status(500).json({ message: "not implemented", page });
-}
-
-function handleConfig(req, res) {
-  res.json({ config });
 }
