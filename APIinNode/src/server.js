@@ -5,12 +5,14 @@ import searchRouter from "./searchRouter.js";
 import config from "./config/index.js";
 import configRouter from "./config/configRouter.js";
 import pagesRouter from "./pages/pagesRouter.js";
+import { authRouter } from "./auth/index.js";
 
 const app = express();
 const port = config.port;
 
 app.use(express.static("static"));
 
+app.use("/", authRouter);
 app.use("/", configRouter);
 app.use("/", pagesRouter);
 app.use("/", searchRouter);
