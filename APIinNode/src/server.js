@@ -1,7 +1,5 @@
 import express from "express";
-import ingredientsRouter from "./ingredientsRouter.js";
-import recipesRouter from "./recipesRouter.js";
-import searchRouter from "./searchRouter.js";
+import recipesRouter from "./recipes/recipesRouter.js";
 import config from "./config/index.js";
 import configRouter from "./config/configRouter.js";
 import pagesRouter from "./pages/pagesRouter.js";
@@ -13,11 +11,12 @@ const port = config.port;
 app.use(express.static("static"));
 
 app.use("/", authRouter);
-app.use("/", authMiddleware, configRouter);
 app.use("/", pagesRouter);
-app.use("/", searchRouter);
-app.use("/api", ingredientsRouter);
 app.use("/api", recipesRouter);
+// not sure why but if this is before
+// for example ingredientsRouter
+// then it will also trigger the auth middleware
+app.use("/", authMiddleware, configRouter);
 
 export function appStart() {
   // creates and starts a server for our API on a defined port

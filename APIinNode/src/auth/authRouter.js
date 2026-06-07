@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { createJWT } from "./jwt.js";
-import db from "../db.js";
+import db from "../db/db.js";
 
 const authRouter = Router();
 
