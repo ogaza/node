@@ -31,19 +31,18 @@ async function handleSignIn({ query }, res) {
   // also the sameSite should be set
   // probably to either strict or lax
   res.cookie("token", token, {
-    httpOnly: false,
-    secure: false,
-    signed: false,
+    httpOnly: true,
+    secure: true,
+    signed: true,
   });
 
   // end request with redirection
   res.redirect("http://localhost:7001/isJwtsCookieSet");
 }
 
-function handleIsJwtsCookieSet({ cookies }, res) {
+function handleIsJwtsCookieSet({ signedCookies }, res) {
   // get the "token" cookie from the request
-  const { token } = cookies;
-  console.log("jwtToken from request: ", token);
+  const { token } = signedCookies;
 
   if (!token) {
     res.status(401);

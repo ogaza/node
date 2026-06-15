@@ -16,6 +16,7 @@ const defaultConfig = {
   stage,
   dbUrl: process.env.DB_URL,
   jwtSecret: process.env.JWT_SECRET,
+  cookieSecret: process.env.COOKIE_SECRET,
   port: process.env.PORT,
   logging: false,
 };

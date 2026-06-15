@@ -10,7 +10,10 @@ const app = express();
 const port = config.port;
 
 app.use(express.static("static"));
-app.use(cookieParser());
+
+console.log("config.cookieSecret: ", config.cookieSecret);
+
+app.use(cookieParser(config.cookieSecret));
 
 app.use("/", authRouter);
 app.use("/", pagesRouter);
