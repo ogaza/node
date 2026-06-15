@@ -40,28 +40,14 @@ async function handleSignIn({ query }, res) {
   res.redirect("http://localhost:7001/isJwtsCookieSet");
 }
 
-function handleIsJwtsCookieSet({ signedCookies }, res) {
-  // get the "token" cookie from the request
-  const { token } = signedCookies;
+function handleIsJwtsCookieSet(req, res) {
+  console.log(req.user);
 
-  if (!token) {
-    res.status(401);
-    res.send("jwt test result: unauthorized");
-
-    return;
+  if (!req.user) {
+    return res.status(401).send("jwt test result: unauthorized");
   }
 
-  try {
-    // verify the jwt token
-    const user = verifyJWT(token);
-
-    // send it in the response
-    res.json({ user });
-  } catch (error) {
-    console.error(error);
-    res.status(401);
-    res.send("jwt test result: unauthorized");
-  }
+  res.json({ user: req.user });
 }
 
 export default authRouter;
