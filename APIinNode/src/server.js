@@ -1,14 +1,16 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import recipesRouter from "./recipes/recipesRouter.js";
 import config from "./config/index.js";
 import configRouter from "./config/configRouter.js";
 import pagesRouter from "./pages/pagesRouter.js";
-import { authMiddleware, authRouter } from "./auth/index.js";
+import { authMiddleware, authRouter_v2 as authRouter } from "./auth/index.js";
 
 const app = express();
 const port = config.port;
 
 app.use(express.static("static"));
+app.use(cookieParser());
 
 app.use("/", authRouter);
 app.use("/", pagesRouter);
