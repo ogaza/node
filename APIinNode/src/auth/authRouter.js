@@ -7,6 +7,14 @@ const authRouter = Router();
 authRouter.get("/token", handleGetToken);
 authRouter.get("/signin", handleSignIn);
 
+// this gets the username from the query string
+// looks for the user in the db 
+// once found cretes the jwt and sends it back
+// in the response
+// to do:
+// the jwt should be sent back in the cookie 
+// as was done in the WebSecurity project of the 
+// Vanill JS repo
 async function handleSignIn({ query }, res) {
   const { username } = query;
   console.log("user to fiind: ", username);
@@ -25,9 +33,18 @@ async function handleSignIn({ query }, res) {
 
   const token = createJWT(user);
 
+  // below is the code from the Vanilla JS repo:
+  // const { secret: jwtEncryptionSecret } = jwtConfig;
+  // var token = jwt.sign({ username }, jwtEncryptionSecret, {
+  //   expiresIn: "20s"
+  // });
+
   res.json({ token });
 }
 
+// this method simply shows how a jwt token can look like
+// takes the id and username from the query string 
+// cretes the jwt token and seds the response with the jwt
 async function handleGetToken({ query }, res) {
   let { id, username } = query;
 
